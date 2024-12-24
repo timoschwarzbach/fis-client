@@ -25,7 +25,9 @@ function Screens() {
 	return (
 		<>
 			<Upcoming hidden={screen.screen !== "stations"} />
-			<MapView hidden={screen.screen !== "map"} />
+			<MapView
+				hidden={screen.screen !== "map" && screen.screen !== "mapview"}
+			/>
 			<ImageView hidden={screen.screen !== "image"} />
 			<VideoView hidden={screen.screen !== "video"} />
 			<NewsView hidden={screen.screen !== "news"} />

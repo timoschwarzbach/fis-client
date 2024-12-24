@@ -1,7 +1,22 @@
 import maplibregl from "maplibre-gl";
+import { useEffect } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-export function addLiveLocation(map: maplibregl.Map) {
+export function LiveLocation({ map }: { map: maplibregl.Map }) {
+	useEffect(() => {
+		const marker = addLiveLocation(map);
+		const watchid = addLocationListener(marker);
+		return () => {
+			marker.remove();
+			if (watchid) {
+				navigator.geolocation.clearWatch(watchid);
+			}
+		};
+	});
+	return <></>;
+}
+
+function addLiveLocation(map: maplibregl.Map) {
 	const element = document.createElement("div");
 	element.innerHTML = renderToStaticMarkup(
 		<div className="relative h-10 w-10">
@@ -17,18 +32,14 @@ export function addLiveLocation(map: maplibregl.Map) {
 	const marker = new maplibregl.Marker({ element: element })
 		.setLngLat([9.993768, 53.552534])
 		.addTo(map);
-	addLocationListener(map, marker);
+	return marker;
 }
 
-function addLocationListener(map: maplibregl.Map, marker: maplibregl.Marker) {
+function addLocationListener(marker: maplibregl.Marker) {
 	try {
 		if ("geolocation" in navigator) {
-			navigator.geolocation.watchPosition((position) => {
+			return navigator.geolocation.watchPosition((position) => {
 				marker.setLngLat([
-					position.coords.longitude,
-					position.coords.latitude,
-				]);
-				map.panTo([
 					position.coords.longitude,
 					position.coords.latitude,
 				]);

@@ -27,5 +27,5 @@ export default function Upcoming({ hidden }: { hidden: boolean }) {
 }
 
 function Spacer() {
-	return <div className="h-full w-full bg-[#dfdfdf]"></div>;
+	return <div className="h-full w-full bg-primary"></div>;
 }

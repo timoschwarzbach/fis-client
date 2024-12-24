@@ -1,6 +1,6 @@
 export function UpcomingStops({ stops }: { stops: string[] }) {
 	return (
-		<div className="flex flex-col-reverse grow h-full justify-start bg-[#dfdfdf] text-black">
+		<div className="flex flex-col-reverse grow h-full justify-start bg-primary text-white">
 			{stops[0] && (
 				<StopLine
 					name={stops[0]}

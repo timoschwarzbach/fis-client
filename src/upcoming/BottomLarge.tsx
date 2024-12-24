@@ -32,7 +32,7 @@ function Line({ hidetop }: { hidetop?: boolean }) {
 
 function StopIndicator() {
 	return (
-		<div className="h-full py-4 pr-4 absolute top-0 bottom-0 right-0 flex items-center">
+		<div className="h-full py-4 pr-4 absolute top-0 bottom-0 right-4 flex items-center">
 			<div className="bg-red-600 rounded-md p-4 px-8 h-full max-h-40 flex items-center min-w-60 justify-center">
 				<span className="text-white font-black text-6xl">STOP</span>
 			</div>

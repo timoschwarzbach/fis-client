@@ -35,7 +35,7 @@ export function IbisDataProvider({ children }: { children: React.ReactNode }) {
 					(data.currentStationIndex + 1) % data.stations.length,
 				stopRequested: false,
 			}));
-		}, 5000);
+		}, 20000);
 
 		// increase the stop request every 5 seconds
 		const stopinterval = setInterval(() => {
