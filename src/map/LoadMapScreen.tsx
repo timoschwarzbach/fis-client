@@ -147,8 +147,36 @@ function renderGeneralIcon(data: {
 	);
 }
 
+/* layouts */
+function renderLayout(data: {
+	direction: "row" | "column";
+	gap: number;
+	items: exportMarker[];
+}) {
+	return renderToStaticMarkup(
+		<div
+			style={{
+				display: "flex",
+				flexDirection: data.direction,
+				alignItems: "center",
+				justifyContent: "center",
+				gap: data.gap,
+			}}
+		>
+			{data.items.map((marker) => (
+				<div
+					dangerouslySetInnerHTML={{
+						__html: renderTable[marker.type](marker.data),
+					}}
+				/>
+			))}
+		</div>
+	);
+}
+
 /* renderTable */
 const renderTable: Record<string, (data: any) => string> = {
 	label: renderLineIcon,
 	icon: renderGeneralIcon,
+	layout: renderLayout,
 };
