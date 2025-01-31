@@ -59,7 +59,8 @@ export default function Map() {
 // U2: 15858436
 // S75 -> Münster: 1723831
 // Tram 7: 2425311
-function loadLineOverlay(map: maplibregl.Map, lineid: string = "1723831") {
+// Tram 6 (Bremen): 963100
+function loadLineOverlay(map: maplibregl.Map, lineid: string = "963100") {
 	try {
 		console.log("loading line overlay", lineid);
 

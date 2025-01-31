@@ -8,7 +8,7 @@ export function StartingStop() {
 				title={<span className="text-black">Willkommen</span>}
 				message={
 					<span className="text-gray-700">
-						Vielen Dank für die Fahrt mit der Westfalenbus.
+						Vielen Dank für die Fahrt mit der BSAG.
 						<br />
 						Wir wünschen Ihnen eine angenehme Reise.
 					</span>
@@ -23,12 +23,13 @@ export function TerminatingStop() {
 		<div className="flex flex-row h-full max-h-80 items-center bg-primary">
 			<Line />
 			<Message
-				title={<span className="text-white">Dieser Bus endet hier</span>}
+				title={
+					<span className="text-white">Diese Fahrt endet hier</span>
+				}
 				message={
 					<span className="text-gray-300">
 						Wir bitten alle Fahrgäste auszusteigen.
-						<br /> Vielen Dank für die Reise mit DB Regio
-						Westfalenbus.
+						<br /> Vielen Dank für die Reise mit der BSAG
 					</span>
 				}
 			/>
