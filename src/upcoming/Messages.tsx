@@ -5,9 +5,9 @@ export function StartingStop() {
 		<div className="flex flex-row h-full max-h-80 items-center bg-white">
 			<Line />
 			<Message
-				title={<span className="text-black">Willkommen</span>}
+				title={<span className="">Willkommen</span>}
 				message={
-					<span className="text-gray-700">
+					<span className="">
 						Vielen Dank für die Fahrt mit der Westfalenbus.
 						<br />
 						Wir wünschen Ihnen eine angenehme Reise.
@@ -23,7 +23,9 @@ export function TerminatingStop() {
 		<div className="flex flex-row h-full max-h-80 items-center bg-primary">
 			<Line />
 			<Message
-				title={<span className="text-white">Dieser Bus endet hier</span>}
+				title={
+					<span className="text-white">Dieser Bus endet hier</span>
+				}
 				message={
 					<span className="text-gray-300">
 						Wir bitten alle Fahrgäste auszusteigen.
@@ -45,10 +47,8 @@ function Message({
 }) {
 	return (
 		<div className="w-full">
-			<h1 className="text-4xl py-4 font-bold text-black">{title}</h1>
-			<p className="text-2xl font-semibold text-gray-700 w-1/2">
-				{message}
-			</p>
+			<h1 className="text-6xl py-4 font-extrabold text-black">{title}</h1>
+			<p className="text-4xl text-slate-800">{message}</p>
 		</div>
 	);
 }

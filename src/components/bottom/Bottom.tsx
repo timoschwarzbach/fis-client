@@ -7,7 +7,10 @@ export default function Bottom() {
 	return (
 		<div className="h-60 flex flex-row items-center relative bg-white px-8">
 			<div className="flex relative grow h-full items-center">
-				<span className="text-8xl font-bold overflow-hidden text-black">
+				<span
+					data-stopRequested={stopRequested}
+					className="text-8xl font-bold text-black data-[stopRequested=true]:font-[800] transition-[font-weight]"
+				>
 					{stations[currentStationIndex]}
 				</span>
 			</div>
