@@ -47,8 +47,8 @@ function Message({
 }) {
 	return (
 		<div className="w-full">
-			<h1 className="text-6xl py-4 font-extrabold text-black">{title}</h1>
-			<p className="text-4xl text-slate-800">{message}</p>
+			<h1 className="text-5xl py-4 font-bold text-black">{title}</h1>
+			<p className="text-3xl text-slate-800">{message}</p>
 		</div>
 	);
 }
