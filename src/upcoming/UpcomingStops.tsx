@@ -1,24 +1,26 @@
-export function UpcomingStops({ stops }: { stops: string[] }) {
+import { StopPoint } from "../provder/ibis/CustomerInformationService";
+
+export function UpcomingStops({ stops }: { stops: StopPoint[] }) {
 	return (
 		<div className="flex flex-col-reverse grow h-full justify-start bg-primary text-white">
 			{stops[0] && (
 				<StopLine
-					name={stops[0]}
-					key={stops[0]}
+					name={stops[0].StopName.Value}
+					key={stops[0].StopRef.Value}
 					final={stops.length == 1}
 				/>
 			)}
 			{stops[1] && (
 				<StopLine
-					name={stops[1]}
-					key={stops[1]}
+					name={stops[1].StopName.Value}
+					key={stops[1].StopRef.Value}
 					final={stops.length == 2}
 				/>
 			)}
 			{stops[2] && (
 				<StopLine
-					name={stops[2]}
-					key={stops[2]}
+					name={stops[2].StopName.Value}
+					key={stops[2].StopRef.Value}
 					final={stops.length == 3}
 					fadeout
 				/>

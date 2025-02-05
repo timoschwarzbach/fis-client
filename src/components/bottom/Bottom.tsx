@@ -1,20 +1,24 @@
 import { useContext } from "react";
-import { IbisContext } from "../../provder/Ibis";
+import { IbisContext } from "../../provder/ibis/Ibis";
 
 export default function Bottom() {
-	const { stopRequested, stations, currentStationIndex } =
+	const { VehicleStopRequested, TripInformation, CurrentStopIndex } =
 		useContext(IbisContext);
+	const currentStop =
+		TripInformation.StopSequence.StopPoints[CurrentStopIndex.Value];
 	return (
 		<div className="h-60 flex flex-row items-center relative bg-white px-8">
 			<div className="flex relative grow h-full items-center">
 				<span
-					data-stopRequested={stopRequested}
+					data-stopRequested={VehicleStopRequested}
 					className="text-8xl font-bold text-black data-[stopRequested=true]:font-[800] transition-[font-weight]"
 				>
-					{stations[currentStationIndex]}
+					{currentStop
+						? currentStop.StopName.Value
+						: "Couldn't load stop"}
 				</span>
 			</div>
-			{stopRequested && <StopIndicator />}
+			{VehicleStopRequested.Value && <StopIndicator />}
 		</div>
 	);
 }

@@ -1,16 +1,17 @@
 import { useContext } from "react";
 import { NextStationText } from "../components/bottom/NextStationText.tsx";
-import { IbisContext } from "../provder/Ibis.tsx";
+import { IbisContext } from "../provder/ibis/Ibis.tsx";
 
 export default function BottomLarge({ hidetop }: { hidetop?: boolean }) {
-	const { stations, currentStationIndex, stopRequested } =
+	const { TripInformation, CurrentStopIndex, VehicleStopRequested } =
 		useContext(IbisContext);
-	const currentStop = stations[currentStationIndex];
+	const currentStop =
+		TripInformation.StopSequence.StopPoints[CurrentStopIndex.Value];
 	return (
 		<div className="h-80 shrink-0 flex flex-row items-center relative bg-white">
 			<Line hidetop={hidetop} />
-			<NextStationText name={currentStop} />
-			{stopRequested && <StopIndicator />}
+			<NextStationText name={currentStop.StopName.Value} />
+			{VehicleStopRequested && <StopIndicator />}
 		</div>
 	);
 }

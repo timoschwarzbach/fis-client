@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { IbisContext } from "../provder/Ibis";
+import { IbisContext } from "../provder/ibis/Ibis";
 import { ScreenContext } from "../provder/Screen";
 
 export function DevOverlay() {
@@ -8,21 +8,20 @@ export function DevOverlay() {
 
 	const [hidden, setHidden] = useState(true);
 	useEffect(() => {
-    const handleEsc = (event: any) => {
-       if (event.key === ' ') {
-        setHidden(hidden => !hidden);
-      }
-    };
-    window.addEventListener('keydown', handleEsc);
+		const handleEsc = (event: any) => {
+			if (event.key === " ") {
+				setHidden((hidden) => !hidden);
+			}
+		};
+		window.addEventListener("keydown", handleEsc);
 
-    return () => {
-      window.removeEventListener('keydown', handleEsc);
-    };
-  }, []);
+		return () => {
+			window.removeEventListener("keydown", handleEsc);
+		};
+	}, []);
 
 	return (
-		<div className="absolute" hidden={hidden}
-		>
+		<div className="absolute" hidden={hidden}>
 			<div className="bg-black text-white bg-opacity-50 p-2 flex flex-col gap-2">
 				<div>
 					<h1>Dev overlay</h1>
@@ -35,8 +34,8 @@ export function DevOverlay() {
 				<div>
 					<h2>Ibis Context</h2>
 					<p>
-						i: {ibisCtx.currentStationIndex}, stop:{" "}
-						{ibisCtx.stopRequested && "yes"}
+						i: {ibisCtx.CurrentStopIndex.Value}, stop:{" "}
+						{ibisCtx.VehicleStopRequested.Value && "yes"}
 					</p>
 				</div>
 			</div>

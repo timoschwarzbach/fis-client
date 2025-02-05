@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import "./App.css";
-import { IbisDataProvider } from "./provder/Ibis";
+import { IbisDataProvider } from "./provder/ibis/Ibis";
 import { ScreenContext, ScreenProvider } from "./provder/Screen";
 import MapView from "./views/Map";
 import Upcoming from "./views/Upcoming";
