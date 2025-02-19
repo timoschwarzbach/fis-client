@@ -8,6 +8,7 @@ import { DevOverlay } from "./views/DevOverlay";
 import ImageView from "./views/Image";
 import NewsView from "./views/News";
 import VideoView from "./views/Video";
+import MediaView from "./views/Media";
 
 function App() {
 	return (
@@ -28,9 +29,14 @@ function Screens() {
 			<MapView
 				hidden={screen.screen !== "map" && screen.screen !== "mapview"}
 			/>
+
+			{/* deprecated start */}
 			<ImageView hidden={screen.screen !== "image"} />
 			<VideoView hidden={screen.screen !== "video"} />
 			<NewsView hidden={screen.screen !== "news"} />
+			{/* deprecated end */}
+
+			<MediaView hidden={screen.screen !== "media"} />
 		</>
 	);
 }
