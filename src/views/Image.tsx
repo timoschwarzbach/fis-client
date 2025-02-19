@@ -19,18 +19,29 @@ export default function ImageView({ hidden }: { hidden: boolean }) {
 }
 
 function Image() {
-	const { data } = useContext(ScreenContext) as {data:string};
+	const { data } = useContext(ScreenContext) as { data: string };
 	return (
 		<MediaContainer>
-		<img
-				className="h-full absolute"
-				// style={{backgroundImage: `url(${data})`}}
+			<div className="h-full absolute w-full overflow-hidden">
+				<img
+					className="h-full w-full object-cover blur-3xl"
+					src={data}
+					onError={(e) => {
+						e.currentTarget.src =
+							"/media/202308xx_Gleisanschluss-Neues-Werk-Cottbus.jpg";
+						e.currentTarget.onerror = null;
+					}}
+				/>
+			</div>
+			<img
+				className="h-full absolute left-0 right-0 mx-auto"
 				src={data}
 				onError={(e) => {
-					e.currentTarget.src = "/media/202308xx_Gleisanschluss-Neues-Werk-Cottbus.jpg";
+					e.currentTarget.src =
+						"/media/202308xx_Gleisanschluss-Neues-Werk-Cottbus.jpg";
 					e.currentTarget.onerror = null;
 				}}
 			/>
 		</MediaContainer>
-	)
+	);
 }

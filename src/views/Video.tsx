@@ -19,20 +19,33 @@ export default function VideoView({ hidden }: { hidden: boolean }) {
 }
 
 function Video() {
-	const { data } = useContext(ScreenContext) as {data:string};
+	const { data } = useContext(ScreenContext) as { data: string };
 	return (
 		<MediaContainer>
-		<video
-				className="h-full absolute"
+			<div className="h-full absolute w-full overflow-hidden">
+				<video
+					className="h-full w-full object-cover blur-3xl"
+					autoPlay
+					muted
+					src={data}
+					onError={(e) => {
+						e.currentTarget.src =
+							"/media/202308xx_Gleisanschluss-Neues-Werk-Cottbus.jpg";
+						e.currentTarget.onerror = null;
+					}}
+				/>
+			</div>
+			<video
+				className="h-full absolute left-0 right-0 mx-auto"
 				autoPlay
 				muted
-				// style={{backgroundImage: `url(${data})`}}
 				src={data}
 				onError={(e) => {
-					e.currentTarget.src = "/media/202308xx_Gleisanschluss-Neues-Werk-Cottbus.jpg";
+					e.currentTarget.src =
+						"/media/202308xx_Gleisanschluss-Neues-Werk-Cottbus.jpg";
 					e.currentTarget.onerror = null;
 				}}
 			/>
 		</MediaContainer>
-	)
+	);
 }
