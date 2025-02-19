@@ -101,7 +101,7 @@ function ContentLayer({ data }: { data: media }) {
 	return (
 		<div className="size-full relative">
 			{data.bottom.visible && data.bottom.background && (
-				<div className="absolute size-full bg-gradient-to-b from-transparent from-50% to-black/90"></div>
+				<div className="absolute size-full bg-gradient-to-b from-transparent from-50% to-black/60"></div>
 			)}
 			{data.bottom.visible && (
 				<div className="absolute size-full flex flex-col justify-end p-8 gap-4">
