@@ -24,7 +24,11 @@ function Screens() {
 		<>
 			<Upcoming hidden={screen.screen !== "stations"} />
 			<MapView
-				hidden={screen.screen !== "map" && screen.screen !== "mapview"}
+				hidden={
+					["map", "mapview", "map-fullRoute"].indexOf(
+						screen.screen
+					) === -1
+				}
 			/>
 			<MediaView hidden={screen.screen !== "media"} />
 		</>

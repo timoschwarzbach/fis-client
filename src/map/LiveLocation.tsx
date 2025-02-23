@@ -24,7 +24,7 @@ function addLiveLocation(map: maplibregl.Map) {
 			<div className="h-full w-full bg-red-600 text-white absolute rounded-full">
 				<img
 					src="/local-bus.svg"
-					className="h-full w-full p-1.5 invert"
+					className="h-full w-full p-2 invert"
 				/>
 			</div>
 		</div>

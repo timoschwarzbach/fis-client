@@ -14,10 +14,7 @@
 	"sources": {
 		"versatiles-shortbread": {
 			"attribution": "© OpenStreetMap contributors",
-			"tiles": [
-				"http://localhost:8090/tiles/osm/{z}/{x}/{y}",
-				"https://tiles.versatiles.org/tiles/osm/{z}/{x}/{y}"
-			],
+			"tiles": ["http://localhost:8090/tiles/osm/{z}/{x}/{y}"],
 			"type": "vector",
 			"scheme": "xyz",
 			"bounds": [-180, -85.0511287798066, 180, 85.0511287798066],
