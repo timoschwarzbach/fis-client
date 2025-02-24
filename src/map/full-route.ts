@@ -1,9 +1,14 @@
 import maplibregl, { LngLatLike } from "maplibre-gl";
 
+async function geoJsonFromLineId(lineid: string): Promise<GeoJSON.FeatureCollection> {
+  const res = await fetch(`/routes/${lineid}.geojson`);
+  return await res.json() as GeoJSON.FeatureCollection;
+}
+
 // todo: instead of fireing this every time - do it once during line change
 export async function showFullRoute(map: maplibregl.Map, lineid: string) {
-  const res = await fetch(`/routes/${lineid}.geojson`);
-  const lineData = await res.json() as GeoJSON.FeatureCollection;
+  const lineData = await geoJsonFromLineId(lineid);
+
   const points = lineData.features.filter(f => f.geometry.type === "Point")
   const coordinates = points.map(p => (p.geometry as GeoJSON.Point).coordinates);
   fitBounds(map, coordinates as LngLatLike[]);
