@@ -56,7 +56,7 @@ function Message({
 function Line() {
 	return (
 		<div className="h-full w-60 relative shrink-0">
-			<div className="absolute h-full left-1/2 w-6 -translate-x-1/2 bottom-0 bg-red-600 mx-auto"></div>
+			<div className="absolute h-full left-1/2 w-5 -translate-x-1/2 bottom-0 bg-red-600 mx-auto"></div>
 		</div>
 	);
 }

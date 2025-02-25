@@ -19,14 +19,14 @@ export default function BottomLarge({ hidetop }: { hidetop?: boolean }) {
 function Line({ hidetop }: { hidetop?: boolean }) {
 	return (
 		<div className="h-full w-60 relative shrink-0">
-			<div className="absolute h-1/2 left-1/2 w-6 -translate-x-1/2 bottom-0 bg-red-600 mx-auto"></div>
-			<div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-[4.5rem] w-[4.5rem] rounded-full bg-red-600/50"></div>
+			<div className="absolute h-1/2 left-1/2 w-5 -translate-x-1/2 bottom-0 bg-red-600 mx-auto"></div>
+			{/* <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-[4.5rem] w-[4.5rem] rounded-full bg-red-600/50"></div> */}
 			<div
 				hidden={hidetop}
-				className="absolute h-1/2 left-1/2 -translate-x-1/2 top-0 w-6 bg-red-600 mx-auto"
+				className="absolute h-1/2 left-1/2 -translate-x-1/2 top-0 w-5 bg-red-600 mx-auto"
 			></div>
-			<div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-11 w-11 rounded-full bg-white"></div>
-			<div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-8 w-8 rounded-full bg-red-600"></div>
+			<div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-12 w-12 rounded-full bg-red-600"></div>
+			<div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-6 w-6 rounded-full bg-white"></div>
 		</div>
 	);
 }
