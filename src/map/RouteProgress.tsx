@@ -15,16 +15,7 @@ export function RouteProgress({
 }: {
 	map: maplibregl.Map;
 	route: Feature<LineString, GeoJsonProperties>;
-	location: Feature<
-		Point,
-		{
-			[key: string]: any;
-			dist: number;
-			index: number;
-			multiFeatureIndex: number;
-			location: number;
-		}
-	>;
+	location: Feature<Point, GeoJsonProperties>;
 }) {
 	useEffect(() => {
 		// spawn layer
@@ -32,18 +23,32 @@ export function RouteProgress({
 
 	useEffect(() => {
 		// recalculate progress
-		const test = turf.lineSplit(route, location);
-		renderRouteProgressOnMap(map, test.features[0]);
-		renderRouteUpcomingOnMap(map, test.features[1]);
+		const parts = turf.lineSplit(route, location);
+		const progress = parts.features[0];
+		const upcoming = parts.features[1];
+
+		if (parts.features.length == 1 && progress) {
+			renderRouteUpcomingOnMap(map, progress);
+		}
+		if (parts.features.length >= 2 && progress && upcoming) {
+			renderRouteProgressOnMap(map, progress);
+			renderRouteUpcomingOnMap(map, upcoming);
+		}
 
 		return () => {
-			map.removeLayer("route-progress-line");
-			map.removeSource("route-progress");
+			map.getLayer("route-progress-line") &&
+				map.removeLayer("route-progress-line");
+			map.getSource("route-progress") &&
+				map.removeSource("route-progress");
 
-			map.removeLayer("route-upcoming-line");
-			map.removeLayer("route-upcoming-line-contrast");
-			map.removeLayer("route-upcoming-circle");
-			map.removeSource("route-upcoming");
+			map.getLayer("route-upcoming-line") &&
+				map.removeLayer("route-upcoming-line");
+			map.getLayer("route-upcoming-line-contrast") &&
+				map.removeLayer("route-upcoming-line-contrast");
+			map.getLayer("route-upcoming-circle") &&
+				map.removeLayer("route-upcoming-circle");
+			map.getSource("route-upcoming") &&
+				map.removeSource("route-upcoming");
 		};
 	}, [location, route]);
 
@@ -71,7 +76,6 @@ function renderRouteUpcomingOnMap(map: maplibregl.Map, data: Feature) {
 		type: "geojson",
 		data: data,
 	})
-
 		.addLayer({
 			id: "route-upcoming-line-contrast",
 			type: "line",

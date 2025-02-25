@@ -3,14 +3,15 @@ import {
 	type LineString,
 	type Feature,
 	type GeoJsonProperties,
-	type Point,
 	type Position,
 } from "geojson";
 import * as turf from "@turf/turf";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useEffect } from "react";
 import { LocationIndicator } from "./LocationIndicator";
 import { RouteProgress } from "./RouteProgress";
+import { FullRoute } from "./screen-FullRoute";
+import { LivePosition } from "./screen-LivePosition";
 
 // Elmshorn 5000: 552213
 // U2: 15858436
@@ -23,25 +24,15 @@ export function LineOverlay({
 	map: maplibregl.Map;
 	line: string;
 }) {
-	const [lineString, setLineString] = useState<Feature<
+	const [route, setRoute] = useState<Feature<
 		LineString,
 		GeoJsonProperties
 	> | null>(null);
 	const [location, setLocation] = useState<GeolocationPosition | null>(null);
-	const [interpolatedLocation, setInterpolatedLocation] = useState<Feature<
-		Point,
-		{
-			[key: string]: any;
-			dist: number;
-			index: number;
-			multiFeatureIndex: number;
-			location: number;
-		}
-	> | null>(null);
 
 	// render lineString when route changes
 	useEffect(() => {
-		getLinestring(line).then(setLineString);
+		getLinestring(line).then(setRoute);
 	}, [line]);
 
 	// keep track of live position
@@ -55,40 +46,44 @@ export function LineOverlay({
 	}, []);
 
 	// calculate closest point on route
-	useEffect(() => {
-		if (!lineString || !location) return;
+	const snapped = useMemo(() => {
+		if (!route || !location) return null;
 		const point = turf.point([
 			location.coords.longitude,
 			location.coords.latitude,
 		]);
-		if (
-			turf.pointToLineDistance(point, lineString, { units: "meters" }) >
-			20
-		) {
+		const distanceToRoute_m = turf.pointToLineDistance(point, route, {
+			units: "meters",
+		});
+		if (distanceToRoute_m > 20) {
 			console.warn("Location is too far from route");
 			console.warn("Todo: redirection mode");
+			return point;
+		} else {
+			return turf.nearestPointOnLine(route, point);
 		}
-		const snapped = turf.nearestPointOnLine(lineString, point);
-		setInterpolatedLocation(snapped);
-	}, [lineString, location]);
+	}, [route, location]);
 
 	return (
 		<>
-			{interpolatedLocation && (
+			{snapped && (
 				<LocationIndicator
 					map={map}
-					location={
-						interpolatedLocation.geometry.coordinates as LngLatLike
-					}
+					location={snapped.geometry.coordinates as LngLatLike}
 				/>
 			)}
-			{interpolatedLocation && lineString && (
-				<RouteProgress
-					map={map}
-					route={lineString}
-					location={interpolatedLocation}
-				/>
+			{snapped && route && (
+				<RouteProgress map={map} route={route} location={snapped} />
 			)}
+			<LivePosition
+				map={map}
+				location={snapped?.geometry.coordinates as LngLatLike}
+			/>
+			<FullRoute
+				map={map}
+				route={route}
+				location={snapped?.geometry.coordinates as LngLatLike}
+			/>
 		</>
 	);
 }

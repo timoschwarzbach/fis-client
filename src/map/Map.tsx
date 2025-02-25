@@ -3,7 +3,6 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { useContext, useEffect, useRef, useState } from "react";
 import { ScreenContext } from "../provder/Screen.tsx";
 import { loadMapScreen, unloadMapScreen } from "./LoadMapScreen.tsx";
-import { showFullRoute } from "./full-route.ts";
 import { LineOverlay } from "./LineOverlay.tsx";
 
 export default function Map() {
@@ -35,26 +34,6 @@ export default function Map() {
 			m.then((m) => unloadMapScreen(m));
 		};
 	}, [screen, data]);
-
-	// live location if screen == map or map-fullRoute
-	useEffect(() => {
-		if (!map) return;
-		if (screen !== "map") return;
-		map.setZoom(15);
-		// todo: keep track of center again
-		// const watchid = addLocationListener(map);
-		// return () => {
-		// 	if (!watchid) return;
-		// 	navigator.geolocation.clearWatch(watchid);
-		// };
-	});
-
-	// full route if screen == map-fullRoute
-	useEffect(() => {
-		if (!map) return;
-		if (screen != "map-fullRoute") return;
-		showFullRoute(map, "1723831");
-	});
 
 	return (
 		<div ref={mapContainer} className="w-full h-full bg-red-600">
