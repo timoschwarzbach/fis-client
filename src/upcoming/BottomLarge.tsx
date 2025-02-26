@@ -11,6 +11,7 @@ export default function BottomLarge({ hidetop }: { hidetop?: boolean }) {
 		<div className="h-80 shrink-0 flex flex-row items-center relative bg-white">
 			<Line hidetop={hidetop} />
 			<NextStationText name={currentStop.StopName.Value} />
+			<span className="text-3xl ml-auto pr-16">{"<"} 1 Min.</span>
 			{VehicleStopRequested.Value && <StopIndicator />}
 		</div>
 	);

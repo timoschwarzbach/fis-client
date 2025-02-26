@@ -42,6 +42,7 @@ function StopLine({
 		<div className="flex flex-row h-1/3 items-center">
 			<Line fadeout={fadeout} hidetop={final} />
 			<span className="text-5xl font-medium">{name}</span>
+			<span className="text-3xl font-medium ml-auto pr-16">3 Min.</span>
 		</div>
 	);
 }

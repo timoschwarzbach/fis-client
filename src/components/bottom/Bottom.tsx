@@ -17,6 +17,7 @@ export default function Bottom() {
 						? currentStop.StopName.Value
 						: "Couldn't load stop"}
 				</span>
+				<span className="text-3xl ml-auto pr-16">{"<"} 1 Min.</span>
 			</div>
 			{VehicleStopRequested.Value && <StopIndicator />}
 		</div>
