@@ -36,7 +36,7 @@ export default function Map() {
 	}, [screen, data]);
 
 	return (
-		<div ref={mapContainer} className="w-full h-full bg-red-600">
+		<div ref={mapContainer} className="w-full h-full">
 			{map && <LineOverlay map={map} line="1723831" />}
 		</div>
 	);
