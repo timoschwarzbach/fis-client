@@ -6,11 +6,10 @@ import { UpcomingStops } from "../upcoming/UpcomingStops";
 import { IbisContext } from "../provder/ibis/Ibis";
 
 export default function Upcoming({ hidden }: { hidden: boolean }) {
+	const { TripInformation, CurrentStopIndex } = useContext(IbisContext);
 	if (hidden) {
 		return <></>;
 	}
-
-	const { TripInformation, CurrentStopIndex } = useContext(IbisContext);
 	const remainingStops = TripInformation.StopSequence.StopPoints.slice(
 		CurrentStopIndex.Value + 1
 	);
